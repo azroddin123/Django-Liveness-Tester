@@ -1,4 +1,3 @@
-# Django-Liveness-Tester
 1.To create a Django application that performs liveness testing follow the following steps.
 
 1. Create a Project
