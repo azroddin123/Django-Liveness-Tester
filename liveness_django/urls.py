@@ -18,11 +18,11 @@ from django.urls import path
 from liveness import views
 
 urlpatterns = [
-    path('',views.show),
+    path('show',views.show),
     path('admin/', admin.site.urls),
-    # path('index', views.index),
-    # path('edit/<int:id>', views.edit),  
-    # path('update/<int:id>', views.update),  
+    path('get', views.get),
+    path('edit/<int:id>', views.edit),  
+    path('update/<int:id>', views.update),  
     # path('delete/<int:id>', views.destroy), 
     path('result/<int:id>',views.test) 
 ]
