@@ -10,8 +10,7 @@
 
     Create a database djangodb in mysql, and configure into the settings.py file of django project.
     
-    ```
-    python
+    ```python
     DATABASES = {  
         'default': {  
             'ENGINE': 'django.db.backends.mysql',  
