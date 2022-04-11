@@ -6,8 +6,12 @@
    `python3 manage.py startapp liveness`
 
 ### 3. Database Setup
+
+
     Create a database djangodb in mysql, and configure into the settings.py file of django project.
-    ```python
+    
+    ```
+    python
     DATABASES = {  
         'default': {  
             'ENGINE': 'django.db.backends.mysql',  
