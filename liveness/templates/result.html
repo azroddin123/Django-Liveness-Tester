@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
+    {% load static %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
@@ -22,19 +23,21 @@
       <br>
     <div class="container">
       <center><h4>Folder_Result</h4> </center>
-    <ul class="list-group">
+    <ol class="list-group" type="1">
         <li class="list-group-item"> <b> Folder path  :-> </b>   {{ task.folder_path }} </li>
         <li class="list-group-item"><b>Total Images :->   </b>   {{ task.total_images}}</li>
         <li class="list-group-item"><b>Skipped Images :-> </b>   {{ task.skipped_images }}</li>
         <li class="list-group-item"><b>Live Images :->    </b>   {{ task.live_images }} </li>
         <li class="list-group-item"><b>Spoof Images :->    </b>   {{ task.spoof_images }} </li>
         <li class="list-group-item"><b>Percentage :->     </b>  {{ task.live_percentage }} % </li>
-      </ul>
-      <b> <p> Total {{ task.total_images }} images are in given folder  <br>
+      </ol>
+      {% comment %} <b> <p> Total {{ task.total_images }} images are in given folder  <br> {% endcomment %}
     </div>
 
     <hr>
     <center><h4> Detailed Image Result </h4></center>
+    
+   
     <hr>
 
     <div>
@@ -42,6 +45,7 @@
         <thead class="thead-dark" style="text-align:center">
           <tr>
             <th scope="col">ID</th>
+            <th scope="col">Thumbnail</th>
             <th scope="col">Image Name</th>
             <th scope="col">Genrated_Label</th>
             <th scope="col">Score</th>
@@ -56,8 +60,12 @@
         <tbody>
           {% for result in results %}
           <tr>
+            
             <th scope="row">{{ result.id }}</th>
-            <td>{{result.image_name}}</td>
+            <td>
+              <img src ="{% get_media_prefix %}images/{{result.folder_id}}/{{result.thumbnail_img_name}}" height=40 width=50> 
+            </td>
+            <td>{{result.thumbnail_img_name}}</td>
             <td>{{ result.label }}</td>
             <td>{{ result.score }}</td>
             <td>{{ result.prediction_age }}</td>
@@ -74,6 +82,31 @@
       <br>
       <hr>
       <br>
+      
+      <center> <h5> Skipped Images List </h5> </center>
+
+
+      <table class="table table-striped">
+        <thead class="thead-dark" style="text-align:center">
+          <tr>
+          
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Image Name</th>
+            
+          </tr>
+        </thead>
+        <tbody style="text-align:center">
+          {% for result in skipped %}
+          <tr>
+            <td>
+              <img src ="{% get_media_prefix %}images/{{result.folder_id}}/{{result.thumbnail_img_name}}" height=40 width=50> 
+            </td>
+            <td>{{result.thumbnail_img_name}}</td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </body>
 </html>

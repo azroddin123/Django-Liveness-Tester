@@ -1,9 +1,12 @@
+from email.policy import default
 from pyexpat import model
 from django.db import models
 
 
 # Create your models here.
 from django.db import models
+from matplotlib.image import thumbnail
+
 
 class Task(models.Model) :
     folder_path = models.CharField(max_length=70,help_text="folder name with path") 
@@ -17,16 +20,18 @@ class Task(models.Model) :
 
 class Result(models.Model):  
     folder = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True) 
-    image_name = models.CharField(max_length=100,help_text="Save image name with path")  
-    type = models.CharField(max_length=15,help_text="sended request to Api has sucess or error")  
-    title = models.CharField(max_length=30,help_text="")  
+    image_name = models.CharField(max_length=100,help_text="Save image name with path",default=None)  
+    type = models.CharField(max_length=15,help_text="sended request to Api has sucess or error",default=None)  
+    title = models.CharField(max_length=30,help_text="",default=None)  
     score = models.FloatField(max_length=30,null=True,default=None) 
-    label = models.CharField(max_length=30,null=True)
-    prediction_gender = models.CharField(max_length=30,null=True) 
-    confidence_gender = models.CharField(max_length=30,null=True)
-    prediction_age = models.IntegerField()
-    confidence_age = models.IntegerField()
+    label = models.CharField(max_length=30,null=True,default=None)
+    prediction_gender = models.CharField(max_length=30,null=True,default=None) 
+    confidence_gender = models.CharField(max_length=30,null=True,default=None)
+    prediction_age = models.IntegerField(null=True,default=None)      
+    confidence_age = models.IntegerField(null=True,default=None)
     show_notification = models.BooleanField(default=False)
+    thumbnail  = models.ImageField(upload_to='images',blank=True,default=None)
+    thumbnail_img_name = models.CharField(max_length=100,default=None)
     class Meta:  
         db_table = "result"
         

@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from liveness import views
+from django.conf.urls.static import static  
 
 urlpatterns = [
     path('show',views.show),
@@ -23,6 +25,10 @@ urlpatterns = [
     path('get', views.get),
     path('edit/<int:id>', views.edit),  
     path('update/<int:id>', views.update),  
-    # path('delete/<int:id>', views.destroy), 
+    path('', views.show), 
     path('result/<int:id>',views.test) 
 ]
+
+from django.conf import settings 
+if settings.DEBUG:  
+        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
