@@ -1,0 +1,20 @@
+
+Restore fresh database:
+dump django:
+  python manage.py dumpdata --exclude auth.permission --exclude contenttypes  intent 2 > db.json
+
+restore:
+  python manage.py migrate # fresh db
+  python manage.py loaddata db.json
+
+
+
+
+/************************Azhar***************************/
+
+If you want to exclude multiple applications, pass --exclude more than once:
+
+django-admin dumpdata --exclude=auth --exclude=contenttypes
+
+
+django-admin loaddata mydata.json
