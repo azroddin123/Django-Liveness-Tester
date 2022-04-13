@@ -1,7 +1,7 @@
 
 Restore fresh database:
 dump django:
-  python manage.py dumpdata --exclude auth.permission --exclude contenttypes  intent 2 > db.json
+  python manage.py dumpdata --exclude auth.permission --exclude contenttypes  --indent 2 > db.json
 
 restore:
   python manage.py migrate # fresh db

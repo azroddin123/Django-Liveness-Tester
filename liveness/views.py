@@ -66,7 +66,6 @@ def test(request,id):
     spoof = 0 
     # Traversing images for testing
     for image in image_data :
-        
         # thumbnail image generation.
         name = os.path.basename(image)
         thumb_image = Image.open(image)
@@ -88,7 +87,6 @@ def test(request,id):
                 rotated = thumb_image.rotate(-90)
             if image_orientation == 8:
                 rotated = thumb_image.rotate(90)
-            
             rotated.save(f"{thumbnail_path}/{name}","jpeg")
         except:
             print("Exception Occured")
@@ -124,7 +122,11 @@ def test(request,id):
             # Storing result of each single image 
             Result.objects.create(image_name=img,type=type,title=title,score=score,label=label,prediction_gender=prediction_gender,confidence_gender=confidence_gender,prediction_age=prediction_age,confidence_age=confidence_age,show_notification=notification,folder_id=id,thumbnail=thumbnail,thumbnail_img_name=name)
     try : 
-        p = round((live / (total_image_count - skip_count ) * 100),2)
+        if task.folder_path : 
+            p = round(( live / (total_image_count - skip_count ) * 100),2)
+        else :
+             p = round(( spoof / (total_image_count - skip_count ) * 100),2)
+            
     except :
         p = 0.00
         print ("Zero Division Error occured")

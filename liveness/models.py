@@ -15,6 +15,7 @@ class Task(models.Model) :
     live_images = models.IntegerField(help_text="live image count",default=0)
     spoof_images = models.IntegerField(help_text="spoof images count here",default=0)
     live_percentage = models.FloatField(help_text="percenage count of live images",default=0)
+    folder_type = models.BooleanField(default=True,help_text= "If 1 Live 0 Spoof " )
     class Meta :
          db_table = "task"
 
@@ -34,6 +35,10 @@ class Result(models.Model):
     thumbnail_img_name = models.CharField(max_length=100,default=None)
     class Meta:  
         db_table = "result"
+        
+        
+        
+        
         
         
 #         from django.db import models

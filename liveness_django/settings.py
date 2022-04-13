@@ -76,22 +76,22 @@ WSGI_APPLICATION = 'liveness_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-DATABASES = {  
-    'default': {  
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'liveness',  
-        'USER':'root',  
-        'PASSWORD':'password',  
-        'HOST':'localhost',  
-        'PORT':'3306'  
-    }  
-}  
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+# DATABASES = {  
+#     'default': {  
+#         'ENGINE': 'django.db.backends.mysql',  
+#         'NAME': 'liveness',  
+#         'USER':'root',  
+#         'PASSWORD':'password',  
+#         'HOST':'localhost',  
+#         'PORT':'3306'  
+#     }  
+# }  
 
 
 # Password validation
