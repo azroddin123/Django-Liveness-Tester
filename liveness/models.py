@@ -15,7 +15,9 @@ class Task(models.Model) :
     live_images = models.IntegerField(help_text="live image count",default=0)
     spoof_images = models.IntegerField(help_text="spoof images count here",default=0)
     live_percentage = models.FloatField(help_text="percenage count of live images",default=0)
-    folder_type = models.BooleanField(default=True,help_text= "If 1 Live 0 Spoof " )
+    folder_type = models.CharField(max_length=10,help_text="Spoof or Live")
+    processed_image = models.IntegerField(default=0)
+    status = models.CharField(max_length=10,help_text="if all image processed complete othrewise incomplete",default="incomplete")
     class Meta :
          db_table = "task"
 
@@ -33,30 +35,6 @@ class Result(models.Model):
     show_notification = models.BooleanField(default=False)
     thumbnail  = models.ImageField(upload_to='images',blank=True,default=None)
     thumbnail_img_name = models.CharField(max_length=100,default=None)
+    error_message = models.CharField(max_length=50,default=" ",null=True)
     class Meta:  
         db_table = "result"
-        
-        
-        
-        
-        
-        
-#         from django.db import models
-
-
-
-# class Result(models.Model):  
-#     folder = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True) 
-#     image_name = models.CharField(max_length=100,help_text="Save image name with path")  
-#     type = models.CharField(max_length=15,help_text="sended request to Api has sucess or error")  
-#     title = models.CharField(max_length=30,help_text="")  
-#     score = models.FloatField(max_length=30,null=True,default=None) 
-#     label = models.CharField(max_length=30,null=True)
-#     prediction_gender = models.CharField(max_length=30,null=True) 
-#     confidence_gender = models.CharField(max_length=30,null=True)
-#     prediction_age = models.IntegerField()
-#     confidence_age = models.IntegerField()
-#     show_notification = models.BooleanField(default=False)
-#     class Meta:  
-#         db_table = "result"
-        

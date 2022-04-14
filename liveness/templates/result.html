@@ -3,6 +3,7 @@
   <head>
     <!-- Required meta tags -->
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
@@ -17,8 +18,15 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <style>
+      img:hover{
+        height: 500px;
+        width: 600px;
+     }
+    </style>
     <title>Liveness-Tester</title>
   </head>
+
   <body>
       <br>
     <div class="container">
@@ -30,16 +38,13 @@
         <li class="list-group-item"><b>Live Images :->    </b>   {{ task.live_images }} </li>
         <li class="list-group-item"><b>Spoof Images :->    </b>   {{ task.spoof_images }} </li>
         <li class="list-group-item"><b>Percentage :->     </b>  {{ task.live_percentage }} % </li>
+        <li class="list-group-item"><b>Folder Type:->     </b>  {{ task.folder_type }} </li>
       </ol>
       {% comment %} <b> <p> Total {{ task.total_images }} images are in given folder  <br> {% endcomment %}
     </div>
-
     <hr>
     <center><h4> Detailed Image Result </h4></center>
-    
-   
     <hr>
-
     <div>
       <table class="table table-striped">
         <thead class="thead-dark" style="text-align:center">
@@ -47,13 +52,11 @@
             <th scope="col">ID</th>
             <th scope="col">Thumbnail</th>
             <th scope="col">Image Name</th>
+            <th scope="col">Original Label</th>
             <th scope="col">Genrated_Label</th>
             <th scope="col">Score</th>
-            <th scope="col">Predict_age</th>
-            <th scope="col">Confid_age</th>
-            <th scope="col">Predict_Gender</th>
-            <th scope="col">Confid_Gender</th>
-            <th scope="col">Type</th>
+  
+          
 
           </tr>
         </thead>
@@ -63,16 +66,12 @@
             
             <th scope="row">{{ result.id }}</th>
             <td>
-              <img src ="{% get_media_prefix %}images/{{result.folder_id}}/{{result.thumbnail_img_name}}" height=40 width=50> 
+              <img src="{% get_media_prefix %}images/{{result.folder_id}}/{{result.thumbnail_img_name}}" height=40 width=50> 
             </td>
             <td>{{result.thumbnail_img_name}}</td>
+            <td>{{ task.folder_type }}</td>
             <td>{{ result.label }}</td>
             <td>{{ result.score }}</td>
-            <td>{{ result.prediction_age }}</td>
-            <td>{{ result.confidence_age }}</td>
-            <td>{{ result.prediction_gender }}</td>
-            <td>{{ result.confidence_gender }}</td>
-            <td>{{ result.title }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -99,7 +98,8 @@
           {% for result in skipped %}
           <tr>
             <td>
-              <img src ="{% get_media_prefix %}images/{{result.folder_id}}/{{result.thumbnail_img_name}}" height=40 width=50> 
+
+              <img id="result_image" src ="{% get_media_prefix %}images/{{result.folder_id}}/{{result.thumbnail_img_name}}" name="img1" height=50 width=40> 
             </td>
             <td>{{result.thumbnail_img_name}}</td>
             
@@ -110,3 +110,7 @@
     </div>
   </body>
 </html>
+
+
+
+
